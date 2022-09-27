@@ -18,7 +18,7 @@ class PostController extends Controller
         $posts = Post::all();
         return response()->json([
             'response' => true,
-            'count' => ($posts),
+            'count' => count($posts),
             'results' => $posts,
         ]);
     }
@@ -52,7 +52,14 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::find($id);
+
+        if($post) return response()->json([
+            'response' => true,
+            'results' => $post,
+        ]);
+        //come se ci fosse scritto else, ma non ci sta bisogno di scriverlo
+        return response ('', 404);
     }
 
     /**
