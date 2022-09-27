@@ -18,6 +18,7 @@ class PostController extends Controller
         $posts = Post::with('user')->paginate(10);
         return response()->json([
             'response' => true,
+            'count' => count($posts),
             'results' => $posts,
         ]);
     }
