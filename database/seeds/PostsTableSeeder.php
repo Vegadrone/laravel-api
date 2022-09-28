@@ -20,7 +20,7 @@ class PostsTableSeeder extends Seeder
             $newPost = new Post();
             $newPost->user_id = $faker->randomElement($users)->id;
             $newPost->title = $faker->realText(50);
-            $newPost->post_image = "https://picsum.photos/200/300?random=1";
+            $newPost->post_image = "https://picsum.photos/300/180?random=1";
             $newPost->post_date = $faker->dateTimeThisYear();
             $newPost->post_content = $faker->paragraphs(5, true);
             $newPost->save();
