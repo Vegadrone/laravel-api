@@ -2005,10 +2005,11 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "row"
   }, [_vm._m(0), _vm._v(" "), _c("div", {
-    staticClass: "col-6"
+    staticClass: "text-center col-12 p-5 justify-content-between"
   }, _vm._l(_vm.posts, function (post) {
     return _c("PostCard", {
       key: post.id,
+      staticClass: "m-4 p-3",
       attrs: {
         post: post
       }
@@ -2047,17 +2048,19 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("div", {
-    staticClass: "card",
-    staticStyle: {
-      width: "18rem"
+    staticClass: "card"
+  }, [_c("img", {
+    attrs: {
+      src: _vm.post.Post_image,
+      alt: _vm.post.title
     }
-  }, [_c("div", {
+  }), _vm._v(" "), _c("div", {
     staticClass: "card-body"
-  }, [_c("h5", {
-    staticClass: "card-title"
+  }, [_c("h2", {
+    staticClass: "card-title font-weight-bold"
   }, [_vm._v(_vm._s(_vm.post.title))]), _vm._v(" "), _c("p", {
     staticClass: "card-text"
-  }, [_vm._v("\n      Some quick example text to build on the card title and make up the bulk\n      of the card's content.\n    ")]), _vm._v(" "), _c("a", {
+  }, [_vm._v("\n      " + _vm._s(_vm.post.post_content) + "\n    ")]), _vm._v(" "), _c("a", {
     staticClass: "btn btn-primary",
     attrs: {
       href: "#"

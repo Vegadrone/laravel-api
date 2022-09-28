@@ -1,11 +1,10 @@
 <template>
-  <div class="card" style="width: 18rem">
-
+  <div class="card">
+    <img :src="post.Post_image" :alt="post.title">
     <div class="card-body">
-      <h5 class="card-title">{{ post.title }}</h5>
+      <h2 class="card-title font-weight-bold">{{ post.title }}</h2>
       <p class="card-text">
-        Some quick example text to build on the card title and make up the bulk
-        of the card's content.
+        {{post.post_content}}
       </p>
       <a href="#" class="btn btn-primary">Leggi il post</a>
     </div>
