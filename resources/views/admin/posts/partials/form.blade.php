@@ -19,20 +19,10 @@
         {{ $message }}
     </div>
 @enderror
-<div class="mb-3">
-    <label for="insert-author" class="form-label">Autore</label>
-    <input value="{{ old('author', $post->user->name) }}" type="text" value="{{ $post->user->name }}" name="author"
-        class="form-control" id="insert-author" placeholder="Inserici la serie di cui fa parte il fumetto" required>
-</div>
-@error('author')
-    <div class="alert alert-danger">
-        {{ $message }}
-    </div>
-@enderror
 <div class="mt-3">
     <label for="post_content">Contenuto del post</label>
     <textarea class="form-control" name="post_content" id="post_content" cols="30" rows="5"
-        placeholder="Scrivi una breve descrizione delle trama del fumetto"required>
+        placeholder="Scrivi il tuo post"required>
                         {{ old('post_content', $post->post_content) }}
                     </textarea>
 </div>

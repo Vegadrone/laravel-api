@@ -13,7 +13,7 @@ class PostController extends Controller
      protected $postValidationRules = [
         'title' => 'required|min:2|max:255',
         'post_image' => 'required|url',
-        'post_content' => 'required|min:5|max:255',
+        'post_content' => 'required|min:5',
         'date' => 'required|date|after:2022/01/01',
      ];
     //custom error messages
@@ -23,8 +23,8 @@ class PostController extends Controller
         'post_image.url' => "Inserisci un link valido",
         'post_image.required' => "Inserisci un link",
         'post_date.after' => 'Inserisci una data valida',
-        'post_content.required' => 'La descrizione deve essere inserita',
-        'post_content.min' => 'La descrizione deve avere almeno 5 caratteri',
+        'post_content.required' => 'Il contenuto del post deve essere inserito',
+        'post_content.min' => 'Il contenuto del post deve avere almeno 5 caratteri',
     ];
 
     /**
@@ -61,11 +61,12 @@ class PostController extends Controller
         $data = $request->validate($this->postValidationRules);
 
         $post = new Post();
-        $post->create($data);
+        $post->fill($data);
+        $post->user_id = Auth::user()->id;
         $post->date = date("Y/m/d H:i:s");
         $post->save();
 
-        return redirect()->route('admin.posts.index')->with("created", "Il Post" . $post->title . " è stato creato.");
+        return redirect()->route('admin.show', $post->id)->with("created", "Il Post" . $post->title . " è stato creato.");
     }
 
     /**
@@ -102,7 +103,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->validate($this->postValidationRules);
+        $data = $request->validate($this->postValidationRules,$this->postValidationMsgs);
 
         $post = Post::findOrFail($id);
         $post->update($data);
