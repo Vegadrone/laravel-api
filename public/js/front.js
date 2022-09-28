@@ -1927,19 +1927,25 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getPosts: function getPosts() {
+      var _this = this;
+
       var postsPage = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      // console.warn('alalalala')
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/posts', {
+      console.warn("Chiamato");
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/posts", {
         page: postsPage
       }).then(function (response) {
-        console.log(response);
+        console.log(response.data.results);
+        _this.posts = response.data.results.data;
+        _this.currentPage = response.data.results.currentPage;
+        _this.lastPage = response.data.results.lastPage;
+        _this.loading = false;
       })["catch"](function (error) {
         console.error(error);
       });
-    },
-    created: function created() {
-      this.getPosts();
     }
+  },
+  created: function created() {
+    this.getPosts();
   }
 });
 
@@ -1954,7 +1960,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["post"]
+});
 
 /***/ }),
 
@@ -1998,7 +2006,14 @@ var render = function render() {
     staticClass: "row"
   }, [_vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "col-6"
-  }, [_c("PostCard")], 1)])]);
+  }, _vm._l(_vm.posts, function (post) {
+    return _c("PostCard", {
+      key: post.id,
+      attrs: {
+        post: post
+      }
+    });
+  }), 1)])]);
 };
 
 var staticRenderFns = [function () {
@@ -2032,8 +2047,22 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("div", {
-    staticClass: "card-container"
-  }, [_vm._v("\n  prova\n")]);
+    staticClass: "card",
+    staticStyle: {
+      width: "18rem"
+    }
+  }, [_c("div", {
+    staticClass: "card-body"
+  }, [_c("h5", {
+    staticClass: "card-title"
+  }, [_vm._v(_vm._s(_vm.post.title))]), _vm._v(" "), _c("p", {
+    staticClass: "card-text"
+  }, [_vm._v("\n      Some quick example text to build on the card title and make up the bulk\n      of the card's content.\n    ")]), _vm._v(" "), _c("a", {
+    staticClass: "btn btn-primary",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("Leggi il post")])])]);
 };
 
 var staticRenderFns = [];

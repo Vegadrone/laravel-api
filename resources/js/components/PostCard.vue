@@ -1,11 +1,21 @@
 <template>
-  <div class="card-container">
-    prova
+  <div class="card" style="width: 18rem">
+
+    <div class="card-body">
+      <h5 class="card-title">{{ post.title }}</h5>
+      <p class="card-text">
+        Some quick example text to build on the card title and make up the bulk
+        of the card's content.
+      </p>
+      <a href="#" class="btn btn-primary">Leggi il post</a>
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["post"],
+};
 </script>
 
 <style>
