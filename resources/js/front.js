@@ -1,11 +1,8 @@
 window.Vue = require('vue');
 
-
-import App from './views/App.vue'
-
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+import App from './views/App'
 
 const app = new Vue({
-    el: '#app',
+    el: '#root',
     render: h => h(App)
 });

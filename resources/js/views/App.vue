@@ -1,11 +1,16 @@
 <template>
-    <div>
-        <h1>ECCOLOOOO!</h1>
-    </div>
+    <section>
+        <MainComponent />
+    </section>
 </template>
 
 <script>
-    export default{};
+    import MainComponent from '../components/Main.vue'
+    export default{
+        components: {
+            MainComponent
+        }
+    };
 </script>
 
 <style>
