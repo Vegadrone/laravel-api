@@ -10,6 +10,23 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+     protected $postValidationRules = [
+        'title' => 'required|min:2|max:255',
+        'post_image' => 'required|url',
+        'post_content' => 'required|min:5|max:255',
+        'date' => 'required|date|after:2022/01/01',
+     ];
+    //custom error messages
+    protected $postValidationMsgs = [
+        'title.required' => 'Inserisci un titolo',
+        'title.min' => 'Il titolo deve avere almeno 3 caratteri',
+        'post_image.url' => "Inserisci un link valido",
+        'post_image.required' => "Inserisci un link",
+        'post_date.after' => 'Inserisci una data valida',
+        'post_content.required' => 'La descrizione deve essere inserita',
+        'post_content.min' => 'La descrizione deve avere almeno 5 caratteri',
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +35,7 @@ class PostController extends Controller
     public function index()
     {
 
-        $posts = Post::paginate(10);
+        $posts = Post::all();
         return view ('admin.posts.index', compact('posts'));
     }
 
@@ -30,7 +47,7 @@ class PostController extends Controller
     public function create()
     {
         $post = new Post();
-        return view('admin.posts.create');
+        return view('admin.posts.create', compact('post'));
     }
 
     /**
@@ -41,11 +58,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = $request->validate($this->postValidationRules);
+
         $post = new Post();
         $post->create($data);
+        $post->date = date("Y/m/d H:i:s");
+        $post->save();
 
-        return redirect()->route('admin.posts.index');
+        return redirect()->route('admin.posts.index')->with("created", "Il Post" . $post->title . " è stato creato.");
     }
 
     /**
@@ -82,7 +102,8 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
+        $data = $request->validate($this->postValidationRules);
+
         $post = Post::findOrFail($id);
         $post->update($data);
         return redirect()->route('admin.posts.index');
@@ -99,6 +120,6 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         $post->delete();
 
-        return redirect()->route('admin.posts.index');
+        return redirect()->route('admin.posts.index')->with("deleted", "Il Post" . $post->title . "è stato cancellato.");;
     }
 }

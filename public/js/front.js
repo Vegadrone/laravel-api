@@ -2051,7 +2051,7 @@ var render = function render() {
     staticClass: "card"
   }, [_c("img", {
     attrs: {
-      src: _vm.post.Post_image,
+      src: _vm.post.post_image,
       alt: _vm.post.title
     }
   }), _vm._v(" "), _c("div", {
@@ -2060,7 +2060,13 @@ var render = function render() {
     staticClass: "card-title font-weight-bold"
   }, [_vm._v(_vm._s(_vm.post.title))]), _vm._v(" "), _c("p", {
     staticClass: "card-text"
-  }, [_vm._v("\n      " + _vm._s(_vm.post.post_content) + "\n    ")]), _vm._v(" "), _c("a", {
+  }, [_vm._v("\n      " + _vm._s(_vm.post.post_content) + "\n    ")]), _vm._v(" "), _c("p", {
+    staticClass: "card-text"
+  }, [_vm._v("\n      Scritto da: "), _c("span", {
+    staticClass: "font-weight-bold"
+  }, [_vm._v(_vm._s(_vm.post.user.name))])]), _vm._v(" "), _c("p", {
+    staticClass: "card-text"
+  }, [_vm._v("\n      Il: " + _vm._s(_vm.post.post_date) + "\n    ")]), _vm._v(" "), _c("a", {
     staticClass: "btn btn-primary",
     attrs: {
       href: "#"

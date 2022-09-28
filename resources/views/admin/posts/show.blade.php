@@ -16,7 +16,7 @@
                 </div>
             @endif
             <div class="card col-12" style="width: 18rem;">
-                <img src="{{$post->Post_image}}" class="card-img-top" alt="{{ $post->title . 'image' }}">
+                <img src="{{$post->post_image}}" class="card-img-top" alt="{{ $post->title . 'image' }}">
                 <div class="card-body">
                     <h4 class="card-title fw-bold">{{ $post->title }}</h4>
                     <p class="card-text">{{ $post->post_content }}.</p>
