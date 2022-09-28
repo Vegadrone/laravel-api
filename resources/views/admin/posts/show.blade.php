@@ -4,17 +4,12 @@
 
 @section('content')
     <div class="container p-5">
-        <div class="row justify-content-center">
-            @if (session('edited'))
-                <div class="alert alert-success">
-                    {{ session('edited') }} è stato modificato correttamente!
-                </div>
-            @endif
-            @if (session('created'))
+         @if (session('created'))
                 <div class="alert alert-success">
                     {{ session('created') }} è stato creato correttamente!
                 </div>
             @endif
+        <div class="row justify-content-center">
             <div class="card col-12" style="width: 18rem;">
                 <img src="{{$post->post_image}}" class="card-img-top" alt="{{ $post->title . 'image' }}">
                 <div class="card-body">

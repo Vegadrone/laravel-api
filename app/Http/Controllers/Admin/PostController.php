@@ -14,7 +14,6 @@ class PostController extends Controller
         'title' => 'required|min:2|max:255',
         'post_image' => 'required|url',
         'post_content' => 'required|min:5',
-        'date' => 'required|date|after:2022/01/01',
      ];
     //custom error messages
     protected $postValidationMsgs = [
@@ -22,7 +21,6 @@ class PostController extends Controller
         'title.min' => 'Il titolo deve avere almeno 3 caratteri',
         'post_image.url' => "Inserisci un link valido",
         'post_image.required' => "Inserisci un link",
-        'post_date.after' => 'Inserisci una data valida',
         'post_content.required' => 'Il contenuto del post deve essere inserito',
         'post_content.min' => 'Il contenuto del post deve avere almeno 5 caratteri',
     ];
@@ -58,15 +56,15 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate($this->postValidationRules);
+        $data = $request->validate($this->postValidationRules, $this->postValidationMsgs);
 
         $post = new Post();
         $post->fill($data);
         $post->user_id = Auth::user()->id;
-        $post->date = date("Y/m/d H:i:s");
+        $post->post_date = date("Y/m/d H:i:s");
         $post->save();
 
-        return redirect()->route('admin.show', $post->id)->with("created", "Il Post" . $post->title . " è stato creato.");
+        return redirect()->route('admin.posts.show', $post->id)->with("created", "Il Post" ." ". $post->title);
     }
 
     /**
@@ -107,7 +105,7 @@ class PostController extends Controller
 
         $post = Post::findOrFail($id);
         $post->update($data);
-        return redirect()->route('admin.posts.index');
+        return redirect()->route('admin.posts.index')->with('edited', "Il Post" . " " . $post->title);
     }
 
     /**
@@ -121,6 +119,6 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         $post->delete();
 
-        return redirect()->route('admin.posts.index')->with("deleted", "Il Post" . $post->title . "è stato cancellato.");;
+        return redirect()->route('admin.posts.index')->with("deleted", "Il Post"  . " " . $post->title);;
     }
 }

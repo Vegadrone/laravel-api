@@ -7,7 +7,7 @@
         <div class="row justify-content-center">
             <form action="{{ route('admin.posts.update', $post->id) }}" method="POST">
                 @csrf
-                @method('PATCH')
+                @method('PUT')
                 @include('admin.posts.partials.form')
             </form>
         </div>
